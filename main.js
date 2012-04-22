@@ -29,7 +29,7 @@ window.onload=function(){
         countdown.x = (game.rootScene.width + countdown.width ) / 2 ;
         countdown.y = (game.rootScene.height + countdown.height ) / 2 ;
         game.rootScene.addChild(countdown);
-        countdown.animation.scaleTo(60,100,enchant.Easing.QUINT_EASEINOUT)
+        countdown.tl.scaleTo(60,100,enchant.Easing.QUINT_EASEINOUT)
 
 		// enemy初期設定
 		enemies = [];
@@ -46,12 +46,12 @@ window.onload=function(){
             else if (enemy.x > 290)
                 enemy.speed *= -1;
             }
-            enemy.animation.moveBy(enemy.speed, 0, randBy(5,30), enchant.Easing.QUINT_EASEINOUT)
+            enemy.tl.moveBy(enemy.speed, 0, randBy(5,30), enchant.Easing.QUINT_EASEINOUT)
                            .delay(10)
                            .then(function(){
               if (enemy.x < 10 || enemy.x > 280) enemy.turn()
             });
-            enemy.animation.looped = true;
+            enemy.tl.looped = true;
 
             enemies.push(enemy);
             game.rootScene.addChild(enemy);
@@ -67,7 +67,7 @@ window.onload=function(){
         player.down_spd = 0.9;
         player.xe = 0.0;
         player.ye = 0.0;
-        player.animation.delay(60).moveTo(player.x, 290, 60, enchant.Easing.BOUNCE_EASEOUT);
+        player.tl.delay(60).moveTo(player.x, 290, 60, enchant.Easing.BOUNCE_EASEOUT);
 		game.rootScene.addChild(player);
 		
 		player.addEventListener('enterframe',function(){
@@ -95,10 +95,10 @@ var debug_log = new Label("y: " + player.y + " up: " + player.up_spd + " down: "
 debug_log.color = "#FFFFFF";
 debug_log.x = 80;
 debug_log.y = 280;
-debug_log.animation.moveTo(debug_log.x, 0, 90, enchant.Easing.EASEOUT).fadeOut(20);
+debug_log.tl.moveTo(debug_log.x, 0, 90, enchant.Easing.EASEOUT).and().fadeOut(50).then(function(){game.rootScene.removeChild(this);});
 game.rootScene.addChild(debug_log);
-        player.animation.clear();
-        player.animation.moveBy(0, -(player.height * player.up_spd * 3), 30, enchant.Easing.QUINT_EASEOUT)
+        player.tl.clear();
+        player.tl.moveBy(0, -(player.height * player.up_spd * 3), 30, enchant.Easing.QUINT_EASEOUT)
                         .moveTo(player.x, 290, 60, enchant.Easing.BOUNCE_EASEOUT);
         });
 	}
