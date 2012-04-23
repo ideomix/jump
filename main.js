@@ -29,7 +29,11 @@ window.onload=function(){
         countdown.x = (game.rootScene.width + countdown.width ) / 2 ;
         countdown.y = (game.rootScene.height + countdown.height ) / 2 ;
         game.rootScene.addChild(countdown);
-        countdown.tl.scaleTo(60,100,enchant.Easing.QUINT_EASEINOUT)
+        countdown.tl.scaleTo(30,30,30,enchant.Easing.QUINT_EASEINOUT).and().fadeOut(30, enchant.Easing.QUINT_EASEINOUT);
+        countdown.frame = 18;
+        countdown.tl.scaleTo(30,30,30,enchant.Easing.QUINT_EASEINOUT).and().fadeOut(30, enchant.Easing.QUINT_EASEINOUT);
+        countdown.frame = 17;
+        countdown.tl.scaleTo(30,30,30,enchant.Easing.QUINT_EASEINOUT).and().fadeOut(30, enchant.Easing.QUINT_EASEINOUT);
 
 		// enemy初期設定
 		enemies = [];
@@ -47,10 +51,13 @@ window.onload=function(){
                 enemy.speed *= -1;
             }
             enemy.tl.moveBy(enemy.speed, 0, randBy(5,30), enchant.Easing.QUINT_EASEINOUT)
-                           .delay(10)
-                           .then(function(){
-              if (enemy.x < 10 || enemy.x > 280) enemy.turn()
-            });
+                    // .and()
+                    // .scaleTo(1.5,1.5,15,enchant.Easing.QUINT_EASEINOUT)
+                    // .scaleTo(1,1,15,enchant.Easing.QUINT_EASEINOUT)
+                    .delay(randBy(3,9))
+                    .then(function(){
+                      enemy.turn()
+                    });
             enemy.tl.looped = true;
 
             enemies.push(enemy);
